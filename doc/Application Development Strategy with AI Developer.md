@@ -20,6 +20,7 @@ This phase focuses on defining and refining the application's requirements colla
    * DevOps tools and pipelines  
    * Testing frameworks and methodologies  
    * Distribution methods (e.g., web, mobile, desktop)  
+   * How the solution is versioned  
 3. **Create initial drafts of:**  
    * User documentation that doubles as marketing material.  
    * A strategy for user adoption and acceptance.  
