@@ -5,7 +5,7 @@ Next Action Master (Nam) is a personal GTD (Getting Things Done) system designed
 ## Documentation
 
 - [Application Development Strategy](./doc/Application_Development_Strategy_with_AI_Developer.md)
-<!-- - [Requirements Document](./doc/Requirements_Document.md) -->
+- [Requirement Document](./doc/Requirements_Document_Next_Action_Master_(Nam).md)
 - [Changelog](./CHANGELOG.md)
 
 ## Current Status
