@@ -2,11 +2,11 @@
 
 * **Goal**: Establish the foundational elements of the project.  
 * **Tasks**:  
-  1. Set up the repository and directory structure.  
-  2. Implement initial CI/CD pipeline with GitHub Actions.  
-  3. Define the data model for inbox items, actions, projects, tags, and contexts.  
-  4. Implement basic JSON file storage and retrieval for the data layer.  
-  5. Create a minimal Flutter project scaffold with placeholder views for testing.
+  1. Set up the repository and directory structure.    
+  2. Define the data model for inbox items, actions, projects, tags, and contexts.  
+  3. Implement basic JSON file storage and retrieval for the data layer.  
+  4. Create a minimal Flutter project scaffold with placeholder views for testing.
+  5. Implement initial CI/CD pipeline with GitHub Actions.
 
 #### **2: Core Functionality**
 
