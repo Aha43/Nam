@@ -9,6 +9,8 @@ Next Action Master (Nam) is a personal GTD (Getting Things Done) system designed
 - [Milestones](./doc/Milestone_Goals.md)
 - [Changelog](./CHANGELOG.md)
 
+Also there is a developers log (the AI) [Developers log](https://github.com/Aha43/Nam/tree/main/doc/developerslog)
+
 ## Current Status
 
 The main branch is currently working towards the **1.0.0 release**. See the [Changelog](./CHANGELOG.md) for details.
