@@ -35,7 +35,11 @@ class _InboxScreenState extends State<InboxScreen> {
 
     await _service.addInboxItem(content);
     _controller.clear();
-    _loadInboxItems();
+    _loadInboxItems(); // Ensure the list is reloaded after adding an item
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Inbox item added!')),
+    );
   }
 
   Future<void> _deleteInboxItem(String id) async {
@@ -46,7 +50,74 @@ class _InboxScreenState extends State<InboxScreen> {
   Future<void> _convertToAction(InboxItem item) async {
     await _service.convertToAction(item);
     _loadInboxItems();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Inbox item "${item.content}" converted to Action!')),
+    );
   }
+
+  Future<void> _convertToProject(InboxItem item) async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Inbox item "${item.content}" converted to Project!')),
+    );
+  }
+
+  Future<void> _showSwipeMenu(InboxItem item) async {
+  final action = await showModalBottomSheet<String>(
+    context: context,
+    builder: (context) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Label to show item content
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              item.content,
+              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.check_circle),
+            title: const Text('Done'),
+            onTap: () => Navigator.pop(context, 'done'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_task),
+            title: const Text('To Action'),
+            onTap: () => Navigator.pop(context, 'to_action'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.assignment),
+            title: const Text('To Project'),
+            onTap: () => Navigator.pop(context, 'to_project'),
+          ),
+          ListTile(
+            leading: const Icon(Icons.cancel),
+            title: const Text('Cancel'),
+            onTap: () => Navigator.pop(context, 'cancel'),
+          ),
+        ],
+      );
+    },
+  );
+
+  switch (action) {
+    case 'done':
+      await _deleteInboxItem(item.id);
+      break;
+    case 'to_action':
+      await _convertToAction(item);
+      break;
+    case 'to_project':
+      await _convertToProject(item);
+      break;
+    case 'cancel':
+    default:
+      break;
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -56,17 +127,21 @@ class _InboxScreenState extends State<InboxScreen> {
       ),
       body: Column(
         children: [
+          // Input Field for Adding Items
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: _controller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Quick Add to Inbox',
+                labelText: 'Add to Inbox',
+                suffixIcon: Icon(Icons.add),
               ),
               onSubmitted: (value) => _addInboxItem(value),
             ),
           ),
+
+          // List of Inbox Items
           Expanded(
             child: ListView.builder(
               itemCount: _items.length,
@@ -74,12 +149,15 @@ class _InboxScreenState extends State<InboxScreen> {
                 final item = _items[index];
                 return Dismissible(
                   key: Key(item.id),
-                  onDismissed: (direction) {
+                  confirmDismiss: (direction) async {
                     if (direction == DismissDirection.startToEnd) {
-                      _deleteInboxItem(item.id);
+                      await _deleteInboxItem(item.id);
+                      return true;
                     } else if (direction == DismissDirection.endToStart) {
-                      _convertToAction(item);
+                      await _showSwipeMenu(item);
+                      return false; // Prevent auto-dismiss after swipe
                     }
+                    return false;
                   },
                   background: Container(
                     color: Colors.red,
@@ -87,7 +165,7 @@ class _InboxScreenState extends State<InboxScreen> {
                   ),
                   secondaryBackground: Container(
                     color: Colors.green,
-                    child: const Icon(Icons.check, color: Colors.white),
+                    child: const Icon(Icons.menu, color: Colors.white),
                   ),
                   child: ListTile(
                     title: Text(item.content),
