@@ -6,11 +6,8 @@ import 'package:nam_app/core/entities/inbox_item.dart';
 import 'package:nam_app/core/abstractions/repository.dart';
 
 // Abstract Repository for Tag
-abstract class TagRepository extends Repository<Tag> {
-  // Example custom operation
-  Future<Tag?> get ByName(String name);
-}
-
+abstract class TagRepository extends Repository<Tag> {}
+ 
 // Abstract Repository for Action
 abstract class ActionRepository extends Repository<Action> {}
 
