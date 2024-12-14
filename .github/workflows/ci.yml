@@ -20,7 +20,9 @@ jobs:
           flutter-version: '3.27.0'
 
       - name: Install Dependencies
+        working-directory: ./src/nam_app
         run: flutter pub get
 
       - name: Run Tests
+        working-directory: ./src/nam_app
         run: flutter test
