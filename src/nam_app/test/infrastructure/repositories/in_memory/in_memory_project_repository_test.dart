@@ -2,7 +2,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nam_app/core/entities/project.dart';
-import 'package:nam_app/infrastructure/repositories/in_memory_project_repository.dart';
+import 'package:nam_app/infrastructure/repositories/in_memory/in_memory_project_repository.dart';
 
 void main() {
   group('InMemoryProjectRepository', () {
