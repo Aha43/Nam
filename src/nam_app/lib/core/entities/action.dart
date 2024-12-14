@@ -4,14 +4,17 @@ class Action {
   String? description;     // Optional description
   bool isCompleted;        // Status of the action
   List<String> tags;       // List of associated tag IDs
+  final DateTime createdAt;      // Timestamp of when the action was created
 
   Action({
     required this.id,
     required this.title,
     this.description,
     this.isCompleted = false,
-    List<String>? tags,
-  }) : tags = tags ?? [];
+    List<String>? tags, 
+    DateTime? createdAt,
+  }) : tags = tags ?? [], 
+    createdAt = createdAt ?? DateTime.now();
 
   void complete() {
     isCompleted = true;

@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:nam_app/core/entities/inbox_item.dart';
-import 'package:nam_app/core/abstractions/repositories.dart';
+import 'package:nam_app/core/abstractions/repositories/repositories.dart';
 
 class InMemoryInboxItemRepository implements InboxItemRepository {
   final List<InboxItem> _items = [];

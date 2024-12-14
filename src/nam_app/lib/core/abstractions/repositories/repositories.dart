@@ -3,7 +3,7 @@ import 'package:nam_app/core/entities/action.dart';
 import 'package:nam_app/core/entities/project.dart';
 import 'package:nam_app/core/entities/context.dart';
 import 'package:nam_app/core/entities/inbox_item.dart';
-import 'package:nam_app/core/abstractions/repository.dart';
+import 'package:nam_app/core/abstractions/repositories/repository.dart';
 
 // Abstract Repository for Tag
 abstract class TagRepository extends Repository<Tag> {}
