@@ -1,4 +1,4 @@
-class Action {
+class NamAction {
   final String id;         // Unique identifier for the action
   String? projectId;       // Optional project ID
   String title;            // Title of the action
@@ -7,7 +7,7 @@ class Action {
   List<String> tags;       // List of associated tag IDs
   final DateTime createdAt;      // Timestamp of when the action was created
 
-  Action({
+  NamAction({
     required this.id,
     this.projectId,
     required this.title,

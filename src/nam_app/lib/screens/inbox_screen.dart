@@ -206,7 +206,6 @@ class _InboxScreenState extends State<InboxScreen> {
             print('Action saved: ${updatedAction.title}, Project: ${updatedAction.projectId}');
           },
           onCancel: (cancelledAction) async {
-            // Save the updated action to your repository or service
             print('Action editing cancelled: ${cancelledAction?.title}');
             if (cancelledAction != null) {
               await _service.addInboxItem(cancelledAction.title);

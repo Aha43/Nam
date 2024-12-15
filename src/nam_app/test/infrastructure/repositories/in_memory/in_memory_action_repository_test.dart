@@ -13,7 +13,7 @@ void main() {
     });
 
     test('add() should store an action', () async {
-      final action = Action(id: '1', title: 'Test Action', createdAt: DateTime.now());
+      final action = NamAction(id: '1', title: 'Test Action', createdAt: DateTime.now());
 
       await repository.add(action);
       final result = await repository.getAll();
@@ -22,7 +22,7 @@ void main() {
     });
 
     test('getById() should retrieve the correct action', () async {
-      final action = Action(id: '1', title: 'Test Action', createdAt: DateTime.now());
+      final action = NamAction(id: '1', title: 'Test Action', createdAt: DateTime.now());
       await repository.add(action);
 
       final result = await repository.getById('1');
@@ -33,7 +33,7 @@ void main() {
     });
 
     test('delete() should remove the action by id', () async {
-      final action = Action(id: '1', title: 'Test Action', createdAt: DateTime.now());
+      final action = NamAction(id: '1', title: 'Test Action', createdAt: DateTime.now());
       await repository.add(action);
 
       await repository.delete('1');
@@ -43,8 +43,8 @@ void main() {
     });
 
     test('getAll() should return all stored actions', () async {
-      final action1 = Action(id: '1', title: 'Action 1', createdAt: DateTime.now());
-      final action2 = Action(id: '2', title: 'Action 2', createdAt: DateTime.now());
+      final action1 = NamAction(id: '1', title: 'Action 1', createdAt: DateTime.now());
+      final action2 = NamAction(id: '2', title: 'Action 2', createdAt: DateTime.now());
 
       await repository.add(action1);
       await repository.add(action2);
@@ -56,10 +56,10 @@ void main() {
     });
 
     test('update() should modify an existing action', () async {
-      final action = Action(id: '1', title: 'Initial Title', createdAt: DateTime.now());
+      final action = NamAction(id: '1', title: 'Initial Title', createdAt: DateTime.now());
       await repository.add(action);
 
-      final updatedAction = Action(id: '1', title: 'Updated Title', createdAt: action.createdAt);
+      final updatedAction = NamAction(id: '1', title: 'Updated Title', createdAt: action.createdAt);
       await repository.update(updatedAction);
 
       final result = await repository.getById('1');

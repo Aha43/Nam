@@ -9,7 +9,7 @@ import 'package:nam_app/core/abstractions/repositories/repository.dart';
 abstract class TagRepository extends Repository<Tag> {}
  
 // Abstract Repository for Action
-abstract class ActionRepository extends Repository<Action> {}
+abstract class ActionRepository extends Repository<NamAction> {}
 
 // Abstract Repository for Project
 abstract class ProjectRepository extends Repository<Project> {}

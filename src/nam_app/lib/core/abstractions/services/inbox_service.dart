@@ -7,6 +7,6 @@ abstract class InboxService {
   Future<List<InboxItem>> getInboxItems();
   Future<void> addInboxItem(String content);
   Future<void> deleteInboxItem(String id);
-  Future<Action> convertToAction(InboxItem item);
+  Future<NamAction> convertToAction(InboxItem item);
   Future<void> markAsDone(InboxItem item);
 }

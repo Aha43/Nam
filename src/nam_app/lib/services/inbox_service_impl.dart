@@ -31,8 +31,8 @@ class InboxServiceImpl implements InboxService {
   }
 
   @override
-  Future<Action> convertToAction(InboxItem item) async {
-    final action = Action(
+  Future<NamAction> convertToAction(InboxItem item) async {
+    final action = NamAction(
       id: item.id, // Reuse ID for traceability
       title: item.content // Map content to title
     );
