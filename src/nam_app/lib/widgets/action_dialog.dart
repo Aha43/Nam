@@ -5,11 +5,13 @@ class ActionDialog extends StatefulWidget {
   final nam.Action action;
   final Future<List<Map<String, String>>> Function() getProjects; // Fetch project list
   final void Function(nam.Action updatedAction) onSave;
+  final Future<void> Function(nam.Action? cancelledAction) onCancel;
 
   const ActionDialog({
     required this.action,
     required this.getProjects,
     required this.onSave,
+    required this.onCancel,
     super.key,
   });
 
@@ -112,7 +114,10 @@ class ActionDialogState extends State<ActionDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context), // Cancel without saving
+          onPressed: () async {
+            await widget.onCancel(widget.action);
+            Navigator.pop(context); // Cancel without saving
+          },
           child: const Text('Cancel'),
         ),
         TextButton(
