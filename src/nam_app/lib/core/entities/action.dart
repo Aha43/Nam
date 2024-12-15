@@ -1,5 +1,6 @@
 class Action {
   final String id;         // Unique identifier for the action
+  String? projectId;       // Optional project ID
   String title;            // Title of the action
   String? description;     // Optional description
   bool isCompleted;        // Status of the action
@@ -8,6 +9,7 @@ class Action {
 
   Action({
     required this.id,
+    this.projectId,
     required this.title,
     this.description,
     this.isCompleted = false,

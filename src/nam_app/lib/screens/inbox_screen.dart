@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nam_app/core/entities/inbox_item.dart';
 import 'package:nam_app/core/abstractions/services/inbox_service.dart';
+import 'package:nam_app/widgets/action_dialog.dart';
 
 class InboxScreen extends StatefulWidget {
   const InboxScreen({super.key});
@@ -35,6 +36,9 @@ class _InboxScreenState extends State<InboxScreen> {
 
     await _service.addInboxItem(content);
     _controller.clear();
+
+    if (!mounted) return; // Ensure the widget is still mounted
+    
     _loadInboxItems(); // Ensure the list is reloaded after adding an item
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -48,12 +52,17 @@ class _InboxScreenState extends State<InboxScreen> {
   }
 
   Future<void> _convertToAction(InboxItem item) async {
-    await _service.convertToAction(item);
+    final action = await _service.convertToAction(item);
+
+    if (!mounted) return; // Ensure the widget is still mounted
+
     _loadInboxItems();
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Inbox item "${item.content}" converted to Action!')),
     );
+
+    _editAction(context, action);
   }
 
   Future<void> _convertToProject(InboxItem item) async {
@@ -178,4 +187,27 @@ class _InboxScreenState extends State<InboxScreen> {
       ),
     );
   }
+
+    void _editAction(BuildContext context, dynamic action) {
+      showDialog(
+      context: context,
+      builder: (context) {
+        return ActionDialog(
+          action: action,
+          getProjects: () async {
+            // Replace with a call to your ProjectRepository to fetch projects
+            return [
+              {'id': '1', 'name': 'Project 1'},
+              {'id': '2', 'name': 'Project 2'},
+            ];
+          },
+          onSave: (updatedAction) {
+            // Save the updated action to your repository or service
+            print('Action saved: ${updatedAction.title}, Project: ${updatedAction.projectId}');
+          },
+        );
+      },
+    );
+  }
+
 }

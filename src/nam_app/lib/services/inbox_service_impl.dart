@@ -31,13 +31,14 @@ class InboxServiceImpl implements InboxService {
   }
 
   @override
-  Future<void> convertToAction(InboxItem item) async {
+  Future<Action> convertToAction(InboxItem item) async {
     final action = Action(
       id: item.id, // Reuse ID for traceability
       title: item.content // Map content to title
     );
     await _actionRepository.add(action);
     await _inboxRepository.delete(item.id);
+    return action;
   }
 
   @override
