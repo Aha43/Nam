@@ -69,9 +69,9 @@ class ProjectDialogState extends State<ProjectDialog> {
                 DropdownButtonFormField<String?>(
                   value: _selectedParentProjectId,
                   items: [
-                    DropdownMenuItem(
+                    const DropdownMenuItem(
                       value: null,
-                      child: const Text('No Parent'),
+                      child: Text('No Parent'),
                     ),
                     ...projectOptions.map((project) {
                       return DropdownMenuItem(
