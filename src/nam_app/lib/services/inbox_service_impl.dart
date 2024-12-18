@@ -4,12 +4,14 @@ import 'package:nam_app/core/entities/action.dart';
 import 'package:nam_app/core/entities/inbox_item.dart';
 import 'package:nam_app/core/abstractions/repositories/repositories.dart';
 import 'package:nam_app/core/abstractions/services/inbox_service.dart';
+import 'package:nam_app/core/entities/project.dart';
 
 class InboxServiceImpl implements InboxService {
   final InboxItemRepository _inboxRepository;
   final ActionRepository _actionRepository;
+  final ProjectRepository _projectRepository;
 
-  InboxServiceImpl(this._inboxRepository, this._actionRepository);
+  InboxServiceImpl(this._inboxRepository, this._actionRepository, this._projectRepository);
 
   @override
   Future<List<InboxItem>> getInboxItems() {
@@ -39,6 +41,17 @@ class InboxServiceImpl implements InboxService {
     await _actionRepository.add(action);
     await _inboxRepository.delete(item.id);
     return action;
+  }
+
+  @override
+  Future<Project> convertToProject(InboxItem item) async {
+    final project = Project(
+      id: item.id, // Reuse ID for traceability
+      title: item.content // Map content to title
+    );
+    await _projectRepository.add(project);
+    await _inboxRepository.delete(item.id);
+    return project;
   }
 
   @override

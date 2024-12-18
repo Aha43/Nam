@@ -4,6 +4,7 @@ import 'package:nam_app/core/abstractions/repositories/repositories.dart';
 import 'package:nam_app/core/abstractions/services/inbox_service.dart';
 import 'package:nam_app/infrastructure/repositories/in_memory/in_memory_action_repository.dart';
 import 'package:nam_app/infrastructure/repositories/in_memory/in_memory_inbox_item_repository.dart';
+import 'package:nam_app/infrastructure/repositories/in_memory/in_memory_project_repository.dart';
 import 'package:nam_app/services/inbox_service_impl.dart';
 import 'screens/inbox_screen.dart';
 
@@ -13,12 +14,14 @@ void main() {
   // Register repositories
   getIt.registerSingleton<InboxItemRepository>(InMemoryInboxItemRepository());
   getIt.registerSingleton<ActionRepository>(InMemoryActionRepository());
+  getIt.registerSingleton<ProjectRepository>(InMemoryProjectRepository());
 
   // Register service
   getIt.registerSingleton<InboxService>(
     InboxServiceImpl(
       getIt<InboxItemRepository>(),
       getIt<ActionRepository>(),
+      getIt<ProjectRepository>(),
     ),
   );
 

@@ -1,5 +1,6 @@
 class Project {
   final String id;                 // Unique identifier
+  String? parentId;                // Optional parent project ID
   String title;                    // Project title
   String? description;             // Optional description
   List<String> actions;            // List of associated action IDs

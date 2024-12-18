@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nam_app/core/entities/action.dart' as nam;
+import 'package:nam_app/core/entities/action.dart';
 
 class ActionDialog extends StatefulWidget {
-  final nam.NamAction action;
+  final NamAction action;
   final Future<List<Map<String, String>>> Function() getProjects; // Fetch project list
-  final void Function(nam.NamAction updatedAction) onSave;
-  final Future<void> Function(nam.NamAction? cancelledAction) onCancel;
+  final void Function(NamAction updatedAction) onSave;
+  final Future<void> Function(NamAction? cancelledAction) onCancel;
 
   const ActionDialog({
     required this.action,

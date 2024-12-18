@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:nam_app/core/entities/inbox_item.dart';
 import 'package:nam_app/core/abstractions/services/inbox_service.dart';
 import 'package:nam_app/widgets/action_dialog.dart';
+import 'package:nam_app/widgets/project_dialog.dart';
 
 class InboxScreen extends StatefulWidget {
   const InboxScreen({super.key});
@@ -66,9 +67,17 @@ class _InboxScreenState extends State<InboxScreen> {
   }
 
   Future<void> _convertToProject(InboxItem item) async {
+    final project= await _service.convertToProject(item);
+
+    if (!mounted) return; // Ensure the widget is still mounted
+
+    _loadInboxItems();
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Inbox item "${item.content}" converted to Project!')),
     );
+
+    _editProject(context, project);
   }
 
   Future<void> _showSwipeMenu(InboxItem item) async {
@@ -203,12 +212,41 @@ class _InboxScreenState extends State<InboxScreen> {
           },
           onSave: (updatedAction) {
             // Save the updated action to your repository or service
-            print('Action saved: ${updatedAction.title}, Project: ${updatedAction.projectId}');
+            print('Action saved: ${updatedAction.title}');
           },
           onCancel: (cancelledAction) async {
             print('Action editing cancelled: ${cancelledAction?.title}');
             if (cancelledAction != null) {
               await _service.addInboxItem(cancelledAction.title);
+              _loadInboxItems();
+            }
+          }
+        );
+      },
+    );
+  }
+
+  void _editProject(BuildContext context, dynamic project) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ProjectDialog(
+          project: project,
+          getProjects: () async {
+            // Replace with a call to your ProjectRepository to fetch projects
+            return [
+              {'id': '1', 'name': 'Project 1'},
+              {'id': '2', 'name': 'Project 2'},
+            ];
+          },
+          onSave: (updatedProject) {
+            // Save the updated action to your repository or service
+            print('Action saved: ${updatedProject.title}');
+          },
+          onCancel: (cancelledProject) async {
+            print('Project editing cancelled: ${cancelledProject?.title}');
+            if (cancelledProject != null) {
+              await _service.addInboxItem(cancelledProject.title);
               _loadInboxItems();
             }
           }
