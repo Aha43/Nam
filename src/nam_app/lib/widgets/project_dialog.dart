@@ -99,7 +99,9 @@ class ProjectDialogState extends State<ProjectDialog> {
             if (widget.onCancel != null) {
               await widget.onCancel!(widget.project);
             }
-            Navigator.pop(context); // Close the dialog without changes
+            if (context.mounted) {
+                Navigator.pop(context); // Close the dialog without changes
+            }
           },
           child: const Text('Cancel'),
         ),

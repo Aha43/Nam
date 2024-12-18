@@ -116,7 +116,9 @@ class ActionDialogState extends State<ActionDialog> {
         TextButton(
           onPressed: () async {
             await widget.onCancel(widget.action);
-            Navigator.pop(context); // Cancel without saving
+            if (context.mounted) {
+              Navigator.pop(context); // Cancel without saving
+            }
           },
           child: const Text('Cancel'),
         ),
