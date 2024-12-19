@@ -96,9 +96,7 @@ class ProjectDialogState extends State<ProjectDialog> {
         // Cancel Button
         TextButton(
           onPressed: () async {
-            if (widget.onCancel != null) {
-              await widget.onCancel!(widget.project);
-            }
+            await widget.onCancel!(widget.project);
             if (context.mounted) {
                 Navigator.pop(context); // Close the dialog without changes
             }
