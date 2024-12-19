@@ -212,10 +212,8 @@ class _InboxScreenState extends State<InboxScreen> {
           },
           onSave: (updatedAction) {
             // Save the updated action to your repository or service
-            print('Action saved: ${updatedAction.title}');
           },
           onCancel: (cancelledAction) async {
-            print('Action editing cancelled: ${cancelledAction?.title}');
             if (cancelledAction != null) {
               await _service.addInboxItem(cancelledAction.title);
               _loadInboxItems();
@@ -241,10 +239,8 @@ class _InboxScreenState extends State<InboxScreen> {
           },
           onSave: (updatedProject) {
             // Save the updated action to your repository or service
-            print('Action saved: ${updatedProject.title}');
           },
           onCancel: (cancelledProject) async {
-            print('Project editing cancelled: ${cancelledProject?.title}');
             if (cancelledProject != null) {
               await _service.addInboxItem(cancelledProject.title);
               _loadInboxItems();
