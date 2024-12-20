@@ -6,6 +6,7 @@ import 'package:nam_app/infrastructure/repositories/in_memory/in_memory_action_r
 import 'package:nam_app/infrastructure/repositories/in_memory/in_memory_inbox_item_repository.dart';
 import 'package:nam_app/infrastructure/repositories/in_memory/in_memory_project_repository.dart';
 import 'package:nam_app/services/inbox_service_impl.dart';
+import 'package:nam_app/widgets/persistent_scaffold.dart';
 import 'screens/inbox_screen.dart';
 
 void main() {
@@ -31,13 +32,44 @@ void main() {
 class NamApp extends StatelessWidget {
   const NamApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Nam - Next Action Master',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const InboxScreen(),
+    return const MaterialApp(
+      home: PersistentScaffold(
+        initialScreen: InboxScreen(), // Start with InboxScreen
+      ),
     );
   }
 }
+
+// class NamApp extends StatelessWidget {
+//   const NamApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('Nam - Next Action Master'),
+//         ),
+//         drawer: MainMenu(getContexts: fetchContexts), // Pass getContexts
+//         body: const InboxScreen(), // Default screen
+//       ),
+//     );
+//   }
+// }
+
+// class NamApp extends StatelessWidget {
+//   const NamApp({super.key});
+
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Nam - Next Action Master',
+//       theme: ThemeData(primarySwatch: Colors.blue),
+//       drawer: const MainMenu(getContexts: fetchContexts),
+//       home: const InboxScreen(),
+//     );
+//   }
+// }
