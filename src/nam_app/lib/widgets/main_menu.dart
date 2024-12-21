@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nam_app/core/abstractions/services/context_service.dart';
 import 'package:nam_app/core/entities/context.dart';
+import 'package:nam_app/screens/context_screen.dart';
 import 'package:nam_app/screens/inbox_screen.dart';
 
 class MainMenu extends StatelessWidget {
@@ -41,8 +42,7 @@ class MainMenu extends StatelessWidget {
                   title: Text(contextItem.name),
                   onTap: () {
                     Navigator.pop(context); // Close the drawer
-                    onNavigate(const InboxScreen());
-                    //onNavigate(ContextScreen(contextId: contextItem.id));
+                    onNavigate(ContextScreen(contextId: contextItem.id));
                   },
                 );
               }),
