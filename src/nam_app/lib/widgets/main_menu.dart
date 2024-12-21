@@ -3,6 +3,7 @@ import 'package:nam_app/core/abstractions/services/context_service.dart';
 import 'package:nam_app/core/entities/context.dart';
 import 'package:nam_app/screens/context_screen.dart';
 import 'package:nam_app/screens/inbox_screen.dart';
+import 'package:nam_app/services/action_service_impl.dart';
 
 class MainMenu extends StatelessWidget {
   final ContextService contextService;
@@ -42,7 +43,10 @@ class MainMenu extends StatelessWidget {
                   title: Text(contextItem.name),
                   onTap: () {
                     Navigator.pop(context); // Close the drawer
-                    onNavigate(ContextScreen(contextId: contextItem.id));
+                    onNavigate(ContextScreen(
+                      contextEntity: contextItem,
+                      actionService: InMemoryActionService(), // Replace with actual service injection
+                    ));
                   },
                 );
               }),
