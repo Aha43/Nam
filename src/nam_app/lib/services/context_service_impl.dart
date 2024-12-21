@@ -7,19 +7,19 @@ class InMemoryContextService implements ContextService {
       id: '1',
       name: 'Work',
       tags: ['work'],
-      //ruleFunction: (action, tags) => tags.any((tag) => action.tags.contains(tag)),
+      ruleFunction: atLeastOneTag, // Use the rule function
     ),
     Context(
       id: '2',
       name: 'Home',
       tags: ['home'],
-      //ruleFunction: (action, tags) => tags.any((tag) => action.tags.contains(tag)),
+      ruleFunction: allTagsMatch, // Use the rule function
     ),
     Context(
       id: '3',
       name: 'Errands',
       tags: ['errand'],
-      //ruleFunction: (action, tags) => tags.any((tag) => action.tags.contains(tag)),
+      ruleFunction: atLeastOneTag, // Use the rule function
     ),
   ];
 

@@ -1,8 +1,21 @@
+import 'package:nam_app/core/entities/action.dart';
+
+typedef RuleFunction = bool Function(NamAction action, List<String> tags);
+
+bool atLeastOneTag(NamAction action, List<String> tags) {
+  return tags.any((tag) => action.tags.contains(tag));
+}
+
+bool allTagsMatch(NamAction action, List<String> tags) {
+  return tags.every((tag) => action.tags.contains(tag));
+}
+
 class Context {
   final String id;             // Unique identifier for the context
   String name;                 // Name of the context
   String? description;         // Optional description of the context
   List<String> tags;           // Tags associated with the context
+  final RuleFunction ruleFunction;
   bool isReadOnly;             // Indicates if the context is read-only
 
   Context({
@@ -10,6 +23,7 @@ class Context {
     required this.name,
     this.description,
     List<String>? tags,
+    required this.ruleFunction,
     this.isReadOnly = false,
   }) : tags = tags ?? [];
 

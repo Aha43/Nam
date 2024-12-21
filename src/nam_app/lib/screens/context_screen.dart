@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nam_app/core/abstractions/services/action_service.dart';
 import 'package:nam_app/core/entities/action.dart';
 import 'package:nam_app/core/entities/context.dart';
+import 'package:nam_app/widgets/action_row.dart';
 
 class ContextScreen extends StatelessWidget {
   final Context contextEntity;
@@ -35,15 +36,20 @@ class ContextScreen extends StatelessWidget {
             itemCount: actions.length,
             itemBuilder: (context, index) {
               final action = actions[index];
-              return ListTile(
-                title: Text(action.title),
-                subtitle: Text(action.description ?? ''),
-                trailing: action.projectId != null
-                    ? Text('Project: ${action.projectId}')
-                    : null,
-                onTap: () {
-                  // Open the edit action dialog (placeholder for now)
+              return ActionRow(
+                action: action,
+                projectName: _getProjectName(action.projectId), // Placeholder
+                onEdit: () {
+                  // Open the edit dialog
                   print('Edit action: ${action.title}');
+                },
+                onDelete: () {
+                  // Delete the action
+                  print('Delete action: ${action.title}');
+                },
+                onNavigateToProject: () {
+                  // Navigate to project (placeholder)
+                  print('Navigate to project: ${action.projectId}');
                 },
               );
             },
@@ -55,9 +61,13 @@ class ContextScreen extends StatelessWidget {
 
   Future<List<NamAction>> _getFilteredActions() async {
     final allActions = await actionService.getAllActions();
-    return allActions;
-    // return allActions.where((action) {
-    //   return contextEntity.ruleFunction(action, contextEntity.tags);
-    // }).toList();
+    return allActions.where((action) {
+      return contextEntity.ruleFunction(action, contextEntity.tags);
+    }).toList();
+  }
+
+  String? _getProjectName(String? projectId) {
+    // Placeholder: Replace with real project lookup logic
+    return projectId == null ? null : 'Project $projectId';
   }
 }
