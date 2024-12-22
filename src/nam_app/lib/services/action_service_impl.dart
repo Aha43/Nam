@@ -13,4 +13,17 @@ class InMemoryActionService implements ActionService {
   Future<List<NamAction>> getAllActions() async {
     return _actions;
   }
+
+  @override
+  Future<void> deleteAction(String id) async {
+    _actions.removeWhere((action) => action.id == id);
+  }
+
+  @override
+  Future<void> updateAction(NamAction action) async {
+    final index = _actions.indexWhere((a) => a.id == action.id);
+    if (index != -1) {
+      _actions[index] = action;
+    }
+  }
 }

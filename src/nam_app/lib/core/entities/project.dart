@@ -1,11 +1,11 @@
 class Project {
-  final String id;                 // Unique identifier
-  String? parentId;                // Optional parent project ID
-  String title;                    // Project title
-  String? description;             // Optional description
-  List<String> actions;            // List of associated action IDs
-  List<String> subprojects;        // List of associated subproject IDs
-  List<String> tags;               // Tags for the project
+  final String id; // Unique identifier
+  String? parentId; // Optional parent project ID
+  String title; // Project title
+  String? description; // Optional description
+  List<String> actions; // List of associated action IDs
+  List<String> subprojects; // List of associated subproject IDs
+  List<String> tags; // Tags for the project
 
   Project({
     required this.id,
@@ -14,6 +14,7 @@ class Project {
     List<String>? actions,
     List<String>? subprojects,
     List<String>? tags,
+    String? parentId,
   })  : actions = actions ?? [],
         subprojects = subprojects ?? [],
         tags = tags ?? [];
