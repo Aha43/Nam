@@ -46,6 +46,11 @@ class ContextScreenState extends State<ContextScreen> {
       appBar: AppBar(
         title: Text('Context: ${widget.contextEntity.name}'),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _addAction(context),
+        tooltip: 'Add Action', // Call the _addAction method
+        child: const Icon(Icons.add),
+      ),
       body: _actions.isEmpty
           ? const Center(child: Text('No actions found for this context.'))
           : ListView.builder(
@@ -114,6 +119,64 @@ class ContextScreenState extends State<ContextScreen> {
             _refreshActions();
             return Future.value();
           },
+        );
+      },
+    );
+  }
+
+  Future<void> _addAction(BuildContext context) async {
+    final newAction = NamAction(
+      id: DateTime.now().toIso8601String(), // Generate a unique ID
+      title: '',
+      description: '',
+      tags: widget.contextEntity.tags.toList(), // Pre-apply the context's tags
+    );
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ActionDialog(
+          action: newAction,
+          getProjects: () async {
+            // Fetch project options for the dropdown
+            return [
+              {'id': '1', 'name': 'Project 1'},
+              {'id': '2', 'name': 'Project 2'},
+            ];
+          },
+          onSave: (updatedAction) async {
+            if (widget.contextEntity.tags
+                .any((tag) => !updatedAction.tags.contains(tag))) {
+              await _showTagWarningDialog(
+                  context); // Show warning if tags are modified
+            }
+            await widget.actionService.addAction(updatedAction); // Save action
+            _refreshActions(); // Refresh the list
+          },
+          onCancel: (_) {
+            // Handle cancel (optional, no changes needed)
+            return Future.value();
+          },
+        );
+      },
+    );
+  }
+
+  Future<void> _showTagWarningDialog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Tag Warning'),
+          content: const Text(
+            'The tags have been modified, so this action may no longer appear in the current context.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
         );
       },
     );
