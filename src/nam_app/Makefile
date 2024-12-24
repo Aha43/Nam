@@ -69,6 +69,15 @@ pub-upgrade:
 doc:
 	dartdoc
 
+# Pre-push checks
+.PHONY: pre-push
+pre-push:
+	@echo "Running pre-push checks..."
+	@$(FLUTTER) analyze || { echo "Static analysis failed!"; exit 1; }
+	@$(FLUTTER) test || { echo "Tests failed!"; exit 1; }
+	@$(FLUTTER) format --set-exit-if-changed . || { echo "Code formatting issues detected! Run 'make format' to fix them."; exit 1; }
+	@echo "All pre-push checks passed. Ready to push."
+
 # Help menu
 .PHONY: help
 help:
@@ -86,3 +95,4 @@ help:
 	@echo "  analyze        - Analyze the code for potential issues"
 	@echo "  pub-upgrade    - Upgrade Flutter dependencies"
 	@echo "  doc            - Generate documentation using dartdoc"
+	@echo "  pre-push       - Run pre-push checks (analyze, test, and format)"
