@@ -1,0 +1,1 @@
+Notes captured from AI chat that believe to contain valuable information for reference and future tasks in the project
