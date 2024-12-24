@@ -78,6 +78,31 @@ pre-push:
 	@$(FLUTTER) format --set-exit-if-changed . || { echo "Code formatting issues detected! Run 'make format' to fix them."; exit 1; }
 	@echo "All pre-push checks passed. Ready to push."
 
+# Test coverage
+.PHONY: coverage
+coverage:
+	@echo "Running tests with coverage..."
+	$(FLUTTER) test --coverage
+	@echo "Coverage report generated at coverage/lcov.info"
+
+# View coverage report
+.PHONY: view-coverage
+view-coverage:
+	@echo "Generating HTML coverage report..."
+	genhtml coverage/lcov.info -o coverage/html
+	@echo "Opening HTML coverage report..."
+	open coverage/html/index.html
+
+# Clean coverage files
+.PHONY: clean-coverage
+clean-coverage:
+	@echo "Cleaning up coverage files..."
+	rm -rf coverage/
+
+# Full coverage workflow
+.PHONY: full-coverage
+full-coverage: coverage view-coverage
+
 # Help menu
 .PHONY: help
 help:
@@ -96,3 +121,7 @@ help:
 	@echo "  pub-upgrade    - Upgrade Flutter dependencies"
 	@echo "  doc            - Generate documentation using dartdoc"
 	@echo "  pre-push       - Run pre-push checks (analyze, test, and format)"
+	@echo "  coverage       - Generate test coverage report (lcov format)"
+	@echo "  view-coverage  - Generate and view HTML test coverage report"
+	@echo "  clean-coverage - Clean test coverage files"
+	@echo "  full-coverage  - Run tests with coverage and view the HTML report"
