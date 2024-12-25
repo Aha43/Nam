@@ -1,11 +1,11 @@
 // lib/infrastructure/repositories/in_memory_context_repository.dart
 
-import 'package:collection/collection.dart';
 import 'package:nam_app/core/entities/context.dart';
 import 'package:nam_app/core/abstractions/repositories/repositories.dart';
+import 'package:nam_app/core/storage/entity_memory.dart';
 
 class InMemoryContextRepository implements ContextRepository {
-  final List<Context> _contexts = [];
+  final EntityMemory<Context> _contexts = EntityMemory();
 
   @override
   Future<void> add(Context context) async {
@@ -14,24 +14,21 @@ class InMemoryContextRepository implements ContextRepository {
 
   @override
   Future<void> delete(String id) async {
-    _contexts.removeWhere((context) => context.id == id);
+    _contexts.delete(id);
   }
 
   @override
   Future<List<Context>> getAll() async {
-    return List.unmodifiable(_contexts);
+    return _contexts.getAll();
   }
 
   @override
   Future<Context?> getById(String id) async {
-    return _contexts.firstWhereOrNull((context) => context.id == id);
+    return _contexts.get(id);
   }
 
   @override
   Future<void> update(Context updatedContext) async {
-    final index = _contexts.indexWhere((context) => context.id == updatedContext.id);
-    if (index != -1) {
-      _contexts[index] = updatedContext;
-    }
+    _contexts.update(updatedContext);
   }
 }

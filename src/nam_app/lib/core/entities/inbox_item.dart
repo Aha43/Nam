@@ -1,29 +1,26 @@
 // InboxItem Class Definition
+import 'package:nam_app/core/abstractions/entity.dart';
 import 'package:uuid/uuid.dart';
 
-class InboxItem {
+class InboxItem implements Entity {
   final String id; // Unique identifier for the inbox item
   String content; // The raw content of the item
   DateTime createdAt; // Timestamp of when the item was created
-  String? actionId; // Optional ID of an associated action
-  String? projectId; // Optional ID of an associated project
+  
 
   InboxItem({
     String? id,
     required this.content,
     DateTime? createdAt,
-    this.actionId,
-    this.projectId,
   })  : id = id ?? const Uuid().v4(),
         createdAt = createdAt ?? DateTime.now();
 
   @override
+  String getId() => id;
+
+  @override
   String toString() {
-    return 'InboxItem(id: $id, content: $content, createdAt: $createdAt, '
-        'actionId: $actionId, projectId: $projectId)';
+    return 'InboxItem(id: $id, content: $content, createdAt: $createdAt)';
   }
 
-  bool isProcessed() {
-    return actionId != null || projectId != null;
-  }
 }

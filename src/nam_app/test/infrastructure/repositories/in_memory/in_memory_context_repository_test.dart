@@ -99,7 +99,7 @@ void main() {
 
     // Extended Test Cases
 
-    test('add() should not allow duplicate contexts with the same id', () async {
+    test('add() should throw an exception for duplicate IDs', () async {
       final context1 = Context(
         id: '1',
         name: 'Context 1',
@@ -112,33 +112,35 @@ void main() {
       );
 
       await repository.add(context1);
-      await repository.add(context2);
+
+      expect(
+        () async => await repository.add(context2),
+        throwsA(isA<ArgumentError>()),
+      );
 
       final result = await repository.getAll();
-
-      // Check that only the first context was added
       expect(result.length, equals(1));
       expect(result.first.name, equals('Context 1'));
     });
 
-    test('delete() should have no effect if the id does not exist', () async {
-      await repository.delete('non-existent-id');
-      final result = await repository.getAll();
-
-      expect(result, isEmpty);
+    test('delete() should throw an exception if the id does not exist', () async {
+      expect(
+        () async => await repository.delete('non-existent-id'),
+        throwsA(isA<ArgumentError>()),
+      );
     });
 
-    test('update() should do nothing if the context does not exist', () async {
+    test('update() should throw an exception if the context does not exist', () async {
       final updatedContext = Context(
         id: 'non-existent-id',
         name: 'Updated Name',
         ruleFunction: allTagsMatch,
       );
 
-      await repository.update(updatedContext);
-      final result = await repository.getAll();
-
-      expect(result, isEmpty);
+      expect(
+        () async => await repository.update(updatedContext),
+        throwsA(isA<ArgumentError>()),
+      );
     });
 
     test('getById() should return null for non-existent id', () async {
@@ -182,11 +184,9 @@ void main() {
       final action = NamAction(id: '1', title: 'Action 1', tags: ['tag1', 'tag2']);
 
       final result = context.ruleFunction(action, ['tag1', 'tag2']);
-
       expect(result, isTrue);
 
       final resultFalse = context.ruleFunction(action, ['tag1', 'tag3']);
-
       expect(resultFalse, isFalse);
     });
   });

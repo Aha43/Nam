@@ -9,9 +9,6 @@ void main() {
       expect(item.id, '1');
       expect(item.content, 'Test content');
       expect(item.createdAt.isBefore(DateTime.now()), isTrue);
-      expect(item.actionId, isNull);
-      expect(item.projectId, isNull);
-      expect(item.isProcessed(), isFalse);
     });
 
     test('should create an InboxItem with custom values', () {
@@ -20,30 +17,22 @@ void main() {
         id: '2',
         content: 'Custom content',
         createdAt: now,
-        actionId: 'action1',
-        projectId: 'project1',
       );
 
       expect(item.id, '2');
       expect(item.content, 'Custom content');
       expect(item.createdAt, now);
-      expect(item.actionId, 'action1');
-      expect(item.projectId, 'project1');
-      expect(item.isProcessed(), isTrue);
     });
 
     test('toString should return the correct format', () {
       final item = InboxItem(
         id: '3',
         content: 'Stringify content',
-        actionId: 'action1',
-        projectId: 'project1',
       );
 
       expect(
         item.toString(),
-        'InboxItem(id: 3, content: Stringify content, createdAt: ${item.createdAt}, '
-        'actionId: action1, projectId: project1)',
+        'InboxItem(id: 3, content: Stringify content, createdAt: ${item.createdAt})'
       );
     });
   });

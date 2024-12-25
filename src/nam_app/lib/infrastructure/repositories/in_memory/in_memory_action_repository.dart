@@ -1,12 +1,11 @@
 // lib/infrastructure/repositories/in_memory_action_repository.dart
 
-import 'package:collection/collection.dart';
 import 'package:nam_app/core/entities/action.dart';
 import 'package:nam_app/core/abstractions/repositories/repositories.dart';
-
+import 'package:nam_app/core/storage/entity_memory.dart';
 
 class InMemoryActionRepository implements ActionRepository {
-  final List<NamAction> _actions = [];
+  final EntityMemory<NamAction> _actions = EntityMemory();
 
   @override
   Future<void> add(NamAction entity) async {
@@ -15,24 +14,21 @@ class InMemoryActionRepository implements ActionRepository {
 
   @override
   Future<void> delete(String id) async {
-    _actions.removeWhere((action) => action.id == id);
+    _actions.delete(id);
   }
 
   @override
   Future<List<NamAction>> getAll() async {
-    return List.unmodifiable(_actions);
+    return _actions.getAll();
   }
 
   @override
   Future<NamAction?> getById(String id) async {
-    return _actions.firstWhereOrNull((action) => action.id == id);
+    return _actions.get(id);
   }
 
   @override
   Future<void> update(NamAction entity) async {
-    final index = _actions.indexWhere((action) => action.id == entity.id);
-    if (index != -1) {
-      _actions[index] = entity;
-    }
+    _actions.update(entity);
   }
 }

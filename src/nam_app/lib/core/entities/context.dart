@@ -1,3 +1,4 @@
+import 'package:nam_app/core/abstractions/entity.dart';
 import 'package:nam_app/core/entities/action.dart';
 import 'package:uuid/uuid.dart';
 
@@ -11,7 +12,7 @@ bool allTagsMatch(NamAction action, List<String> tags) {
   return tags.every((tag) => action.tags.contains(tag));
 }
 
-class Context {
+class Context implements Entity {
   final String id; // Unique identifier for the context
   String name; // Name of the context
   String? description; // Optional description of the context
@@ -28,6 +29,9 @@ class Context {
     this.isReadOnly = false,
   })  : id = id ?? const Uuid().v4(),
         tags = tags ?? [];
+
+  @override
+  String getId() => id;
 
   void addTag(String tagId) {
     if (!isReadOnly && !tags.contains(tagId)) {

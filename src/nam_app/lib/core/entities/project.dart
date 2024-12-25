@@ -1,6 +1,7 @@
+import 'package:nam_app/core/abstractions/entity.dart';
 import 'package:uuid/uuid.dart';
 
-class Project {
+class Project implements Entity {
   final String id; // Unique identifier
   String? parentId; // Optional parent project ID
   String title; // Project title
@@ -21,6 +22,9 @@ class Project {
         actions = actions ?? [],
         subprojects = subprojects ?? [],
         tags = tags ?? [];
+
+  @override
+  String getId() => id;
 
   void addAction(String actionId) {
     if (!actions.contains(actionId)) {

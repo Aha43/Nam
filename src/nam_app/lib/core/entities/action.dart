@@ -1,6 +1,7 @@
+import 'package:nam_app/core/abstractions/entity.dart';
 import 'package:uuid/uuid.dart';
 
-class NamAction {
+class NamAction implements Entity {
   final String id;         // Unique identifier for the action
   String? projectId;       // Optional project ID
   String title;            // Title of the action
@@ -21,6 +22,9 @@ class NamAction {
     tags = tags ?? [], 
     createdAt = createdAt ?? DateTime.now();
 
+  @override
+  String getId() => id;
+  
   void complete() {
     isCompleted = true;
   }
