@@ -18,7 +18,7 @@ class EntityMemory<T extends Entity> {
 
   List<T> getAll() {
     return List.unmodifiable(_storage.values);
-  }
+  } 
 
   void delete(String id) {
     if (!_storage.containsKey(id)) {
