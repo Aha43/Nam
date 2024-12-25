@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class NamAction {
   final String id;         // Unique identifier for the action
   String? projectId;       // Optional project ID
@@ -8,14 +10,15 @@ class NamAction {
   final DateTime createdAt;      // Timestamp of when the action was created
 
   NamAction({
-    required this.id,
+    String? id,
     this.projectId,
     required this.title,
     this.description,
     this.isCompleted = false,
     List<String>? tags, 
     DateTime? createdAt,
-  }) : tags = tags ?? [], 
+  }) : id = id ?? const Uuid().v4(), 
+    tags = tags ?? [], 
     createdAt = createdAt ?? DateTime.now();
 
   void complete() {

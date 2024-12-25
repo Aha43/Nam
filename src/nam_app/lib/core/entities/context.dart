@@ -1,4 +1,5 @@
 import 'package:nam_app/core/entities/action.dart';
+import 'package:uuid/uuid.dart';
 
 typedef RuleFunction = bool Function(NamAction action, List<String> tags);
 
@@ -11,21 +12,22 @@ bool allTagsMatch(NamAction action, List<String> tags) {
 }
 
 class Context {
-  final String id;             // Unique identifier for the context
-  String name;                 // Name of the context
-  String? description;         // Optional description of the context
-  List<String> tags;           // Tags associated with the context
+  final String id; // Unique identifier for the context
+  String name; // Name of the context
+  String? description; // Optional description of the context
+  List<String> tags; // Tags associated with the context
   final RuleFunction ruleFunction;
-  bool isReadOnly;             // Indicates if the context is read-only
+  bool isReadOnly; // Indicates if the context is read-only
 
   Context({
-    required this.id,
+    String? id,
     required this.name,
     this.description,
     List<String>? tags,
     required this.ruleFunction,
     this.isReadOnly = false,
-  }) : tags = tags ?? [];
+  })  : id = id ?? const Uuid().v4(),
+        tags = tags ?? [];
 
   void addTag(String tagId) {
     if (!isReadOnly && !tags.contains(tagId)) {

@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class Project {
   final String id; // Unique identifier
   String? parentId; // Optional parent project ID
@@ -8,14 +10,15 @@ class Project {
   List<String> tags; // Tags for the project
 
   Project({
-    required this.id,
+    String? id,
     required this.title,
     this.description,
     List<String>? actions,
     List<String>? subprojects,
     List<String>? tags,
     String? parentId,
-  })  : actions = actions ?? [],
+  })  : id = id ?? const Uuid().v4(),
+        actions = actions ?? [],
         subprojects = subprojects ?? [],
         tags = tags ?? [];
 
