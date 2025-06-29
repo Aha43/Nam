@@ -1,6 +1,6 @@
-using Nam.Dbo.Abstraction;
+using Nam.Data.Specification.Abstraction;
 
-namespace Nam.Dbo;
+namespace Nam.Data.Specification;
 
 public class ActionTagDbo : IDbo
 {

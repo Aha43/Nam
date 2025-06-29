@@ -1,4 +1,4 @@
-namespace Nam.Dbo.Abstraction;
+namespace Nam.Data.Specification.Abstraction;
 
 public interface IDbo
 {

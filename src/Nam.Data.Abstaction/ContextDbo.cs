@@ -1,8 +1,8 @@
-using Nam.Dbo.Abstraction;
+using Nam.Data.Specification.Abstraction;
 
-namespace Nam.Dbo;
+namespace Nam.Data.Specification;
 
-public class TagDbo : IDbo
+public class ContextDbo : IDbo
 {
     public int Id { get; init; }
     public required string Name { get; init; }

@@ -1,10 +1,11 @@
-using Nam.Dbo.Abstraction;
+using Nam.Data.Specification.Abstraction;
 
-namespace Nam.Dbo;
+namespace Nam.Data.Specification;
 
-public class InboxItemDbo : IDbo
+public class ProjectDbo : IDbo
 {
     public int Id { get; init; }
+    public required string Name { get; init; }
     public required string Description { get; init; }
     public DateTime CreatedAt { get; init; }
     public DateTime UpdatedAt { get; init; }
