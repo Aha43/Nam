@@ -6,9 +6,9 @@ using Nam.Specification.Persistence.Dbo;
 
 namespace Nam.Implementation.Business;
 
-public sealed class InboxItemService(
+public sealed class InboxService(
     IInboxItemRepository inboxItemRepository,
-    ILogger<InboxItemService> logger
+    ILogger<InboxService> logger
 ) : IInboxService
 {
     public async Task<InboxItemDto> AddItemAsync(InboxItemDto item, CancellationToken cancellationToken = default)
