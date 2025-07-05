@@ -9,7 +9,15 @@ public interface IInboxService
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The inbox.</returns>
-    Task<IEnumerable<InboxDto>> GetInboxAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<InboxItemDto>> GetItemsAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     Gets a specific item from the inbox.
+    /// </summary>
+    /// <param name="itemId">The ID of the item to retrieve.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>The item if found, otherwise null.</returns>
+    Task<InboxItemDto?> GetItemAsync(int itemId, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Adds an item to the inbox.
@@ -24,7 +32,7 @@ public interface IInboxService
     /// </summary>
     /// <param name="item"></param>
     /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <returns>The updated item.</returns>
     Task<InboxItemDto> UpdateItemAsync(InboxItemDto item, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -32,6 +40,6 @@ public interface IInboxService
     /// </summary>
     /// <param name="itemId">The ID of the item to delete.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task representing the asynchronous operation.</returns>
-    Task DeleteItemAsync(int itemId, CancellationToken cancellationToken = default);
+    /// <returns>True if the item was deleted, otherwise false.</returns>
+    Task<bool> DeleteItemAsync(int itemId, CancellationToken cancellationToken = default);
 }

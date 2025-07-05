@@ -31,16 +31,44 @@ public sealed class InboxService(
         };
     }
 
-    public async Task DeleteItemAsync(int itemId, CancellationToken cancellationToken = default)
+    public async Task<bool> DeleteItemAsync(int itemId, CancellationToken cancellationToken = default)
     {
         logger.LogInformation("Deleting item from inbox with ID: {Id}", itemId);
 
-        await inboxItemRepository.DeleteAsync(itemId, cancellationToken);
+        var deleted = await inboxItemRepository.DeleteAsync(itemId, cancellationToken);
+
+        if (!deleted)
+        {
+            logger.LogWarning("Item with ID: {Id} not found in inbox for deletion", itemId);
+            return false;
+        }
 
         logger.LogInformation("Deleted item from inbox with ID: {Id}", itemId);
+        return true;
     }
 
-    public async Task<IEnumerable<InboxDto>> GetInboxAsync(CancellationToken cancellationToken = default)
+    public async Task<InboxItemDto?> GetItemAsync(int itemId, CancellationToken cancellationToken = default)
+    {
+        logger.LogInformation("Retrieving item from inbox with ID: {Id}", itemId);
+
+        var item = await inboxItemRepository.GetByIdAsync(itemId, cancellationToken);
+        
+        if (item == null)
+        {
+            logger.LogWarning("Item with ID: {Id} not found in inbox", itemId);
+            return null;
+        }
+
+        logger.LogInformation("Retrieved item from inbox with ID: {Id}", item.Id);
+
+        return new InboxItemDto
+        {
+            Id = item.Id,
+            Description = item.Description
+        };
+    }
+
+    public async Task<IEnumerable<InboxItemDto>> GetItemsAsync(CancellationToken cancellationToken = default)
     {
         logger.LogInformation("Retrieving inbox items");
 
@@ -51,19 +79,14 @@ public sealed class InboxService(
             logger.LogInformation("No items found in inbox");
             return [];
         }
+        
         logger.LogInformation("Retrieved {Count} items from inbox", inboxItems.Count());
 
-        return
-        [
-            new InboxDto
-            {
-                Items = inboxItems.Select(i => new InboxItemDto
-                {
-                    Id = i.Id,
-                    Description = i.Description
-                })
-            }
-        ];
+        return inboxItems.Select(item => new InboxItemDto
+        {
+            Id = item.Id,
+            Description = item.Description
+        });
     }
 
     public async Task<InboxItemDto> UpdateItemAsync(InboxItemDto item, CancellationToken cancellationToken = default)
