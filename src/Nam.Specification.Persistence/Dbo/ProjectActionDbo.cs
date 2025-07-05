@@ -1,6 +1,6 @@
-using Nam.Data.Specification.Abstraction;
+using Nam.Specification.Persistence.Abstraction;
 
-namespace Nam.Data.Specification;
+namespace Nam.Specification.Persistence.Dbo;
 
 public class ProjectActionDbo : IDbo
 {

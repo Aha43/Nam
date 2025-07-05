@@ -1,11 +1,11 @@
-using Nam.Data.Specification.Abstraction;
+using Nam.Specification.Persistence.Abstraction;
 
-namespace Nam.Data.Specification;
+namespace Nam.Specification.Persistence.Dbo;
 
-public class InboxItemDbo : IDbo
+public class TagDbo : IDbo
 {
     public int Id { get; init; }
-    public required string Description { get; init; }
+    public required string Name { get; init; }
     public DateTime CreatedAt { get; init; }
     public DateTime UpdatedAt { get; init; }
     public DateTime? DeletedAt { get; init; }

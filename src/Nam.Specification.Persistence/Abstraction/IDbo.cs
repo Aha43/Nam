@@ -1,4 +1,4 @@
-namespace Nam.Data.Specification.Abstraction;
+namespace Nam.Specification.Persistence.Abstraction;
 
 public interface IDbo
 {

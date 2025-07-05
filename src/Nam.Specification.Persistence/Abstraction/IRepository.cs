@@ -1,4 +1,6 @@
-namespace Nam.Data.Specification.Abstraction;
+using Nam.Specification.Persistence.Dbo;
+
+namespace Nam.Specification.Persistence.Abstraction;
 
 public interface IRepository<T> where T : IDbo
 {
@@ -12,7 +14,7 @@ public interface IRepository<T> where T : IDbo
 public interface IActionRepository : IRepository<ActionDbo> { }
 public interface IActionTagRepository : IRepository<ActionTagDbo> { }
 public interface IContextRepository : IRepository<ContextDbo> { }
-public interface IInboxItemDboRepository : IRepository<InboxItemDbo> { }
+public interface IInboxItemRepository : IRepository<InboxItemDbo> { }
 public interface IProjectActionRepository : IRepository<ProjectActionDbo> { }
 public interface IProjectRepository : IRepository<ProjectDbo> { }
 public interface ITagCategoryRepository : IRepository<TagCategoryDbo> { }

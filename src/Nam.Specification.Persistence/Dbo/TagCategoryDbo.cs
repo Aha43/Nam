@@ -1,8 +1,8 @@
-using Nam.Data.Specification.Abstraction;
+using Nam.Specification.Persistence.Abstraction;
 
-namespace Nam.Data.Specification;
+namespace Nam.Specification.Persistence.Dbo;
 
-public class TagDbo : IDbo
+public class TagCategoryDbo : IDbo
 {
     public int Id { get; init; }
     public required string Name { get; init; }
