@@ -2,12 +2,12 @@ using Nam.Specification.Persistence.Abstraction;
 
 namespace Nam.Specification.Persistence.Dbo;
 
-public class ProjectDbo : IDbo
+public sealed class ProjectDbo : IDbo
 {
-    public int Id { get; init; }
-    public required string Name { get; init; }
-    public required string Description { get; init; }
-    public DateTime CreatedAt { get; init; }
-    public DateTime UpdatedAt { get; init; }
-    public DateTime? DeletedAt { get; init; }
+    public int Id { get; set; }
+    public required string Name { get; set; }
+    public required string Description { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+    public DateTime? DeletedAt { get; set; }
 }

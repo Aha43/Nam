@@ -2,12 +2,12 @@ using Nam.Specification.Persistence.Abstraction;
 
 namespace Nam.Specification.Persistence.Dbo;
 
-public class ActionTagDbo : IDbo
+public sealed class ActionTagDbo : IDbo
 {
-    public int Id { get; init; }
-    public int ActionId { get; init; }
-    public int TagId { get; init; }
-    public DateTime CreatedAt { get; init; }
-    public DateTime UpdatedAt { get; init; }
-    public DateTime? DeletedAt { get; init; } = null;
+    public int Id { get; set; }
+    public int ActionId { get; set; }
+    public int TagId { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+    public DateTime? DeletedAt { get; set; } = null;
 }

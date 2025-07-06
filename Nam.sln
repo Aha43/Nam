@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nam.Application.Api", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nam.Implementation.Persistence.Memory", "src\Nam.Implementation.Persistence.Memory\Nam.Implementation.Persistence.Memory.csproj", "{A19D61CB-2CBD-4E30-B6B9-96CA1E95726D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nam.Crosscutting", "src\Nam.Crosscutting\Nam.Crosscutting.csproj", "{9E9AFF0F-48B5-4BC0-9C0F-CA079E408137}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{A19D61CB-2CBD-4E30-B6B9-96CA1E95726D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A19D61CB-2CBD-4E30-B6B9-96CA1E95726D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A19D61CB-2CBD-4E30-B6B9-96CA1E95726D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E9AFF0F-48B5-4BC0-9C0F-CA079E408137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E9AFF0F-48B5-4BC0-9C0F-CA079E408137}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E9AFF0F-48B5-4BC0-9C0F-CA079E408137}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E9AFF0F-48B5-4BC0-9C0F-CA079E408137}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,5 +57,6 @@ Global
 		{63319D99-6149-4B04-9B19-603C6DE2D18E} = {9FB30127-8B74-4FD5-BFB1-EE06C276BF79}
 		{70D6DB41-3877-4C56-8D69-8FFF3E485ECF} = {9FB30127-8B74-4FD5-BFB1-EE06C276BF79}
 		{A19D61CB-2CBD-4E30-B6B9-96CA1E95726D} = {9FB30127-8B74-4FD5-BFB1-EE06C276BF79}
+		{9E9AFF0F-48B5-4BC0-9C0F-CA079E408137} = {9FB30127-8B74-4FD5-BFB1-EE06C276BF79}
 	EndGlobalSection
 EndGlobal

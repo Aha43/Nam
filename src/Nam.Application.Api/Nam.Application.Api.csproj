@@ -10,10 +10,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../Nam.Crosscutting/Nam.Crosscutting.csproj" />
+    <ProjectReference Include="../Nam.Implementation.Business/Nam.Implementation.Business.csproj" />
+    <ProjectReference Include="../Nam.Implementation.Persistence.Memory/Nam.Implementation.Persistence.Memory.csproj" />
     <ProjectReference Include="../Nam.Specification.Business/Nam.Specification.Business.csproj" />
+    <ProjectReference Include="../Nam.Specification.Persistence/Nam.Specification.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

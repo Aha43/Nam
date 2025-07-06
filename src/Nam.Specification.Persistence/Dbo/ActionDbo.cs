@@ -2,11 +2,11 @@ using Nam.Specification.Persistence.Abstraction;
 
 namespace Nam.Specification.Persistence.Dbo;
 
-public class ActionDbo : IDbo
+public sealed class ActionDbo : IDbo
 {
-    public int Id { get; init; }
-    public required string Description { get; init; }
-    public required DateTime CreatedAt { get; init; }
-    public DateTime UpdatedAt { get; init; }
-    public DateTime? DeletedAt { get; init; } = null;
+    public int Id { get; set; }
+    public required string Description { get; set; }
+    public required DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+    public DateTime? DeletedAt { get; set; } = null;
 }

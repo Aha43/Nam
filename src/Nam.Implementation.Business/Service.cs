@@ -5,7 +5,7 @@ namespace Nam.Implementation.Business;
 
 public static class Service
 {
-    public static IServiceCollection AddBusinessServices(this IServiceCollection services)
+    public static IServiceCollection AddNamBusinessServices(this IServiceCollection services)
     {
         return services.AddScoped<IInboxService, InboxService>();
     }
