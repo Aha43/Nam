@@ -23,6 +23,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseUserContext();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
